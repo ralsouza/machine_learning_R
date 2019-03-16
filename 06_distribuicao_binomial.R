@@ -54,8 +54,8 @@ getwd()
 # que nenhum seja fatal (0 sucessos).
 
 # X = Número de sobreviventes ao ataque
-# p = 0.04
-# n = 5
+# Sucesso ao ataque p = 0.04
+# Total pacientes n = 5 
 # dbinom(X, n, p)
 ?dbinom
 dbinom(0, 5, 0.04)
