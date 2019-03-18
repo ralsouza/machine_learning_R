@@ -51,25 +51,57 @@ dev.off()
 # dbinom(x, n, p)
 
 dbinom(7, 10, 0.8)
+# Reposta: A probabilidade que a medicação seja eficaz em exatamente sete pacientes é de 20,13%.
+
+# Medindo a Distribuição de Probabilidades
+graph <- function(n,p){
+  x <- dbinom(0:n, size = n, prob = p)
+  barplot(x, ylim = c(0,1), names.arg = 0:n,
+          main = sprintf(paste('Distribuição Binomial (n,p)', n, p, sep = ',')))
+}
+graph(10,0.8)
 
 # 4 - Suponha que os resultados dos testes de um vestibular se ajustem a uma distribuição normal. 
 # Além disso, a pontuação média do teste é de 72 e o desvio padrão é de 15,2. 
 # Qual é a porcentagem de alunos que pontuaram 84 ou mais no exame?
 
-
+# Média: 72
+# Desvio Padrão: 15.2
+# Nota: >= 84
+# Como precisamos analisar as notas dos alunos que tiraram a nota igual ou superior à 84, 
+# estamos interessados na cauda superior da distribuição normal.
+pnorm(84, mean = 72, sd = 15.2, lower.tail = FALSE)
 
 # 5 - Suponha que o tempo médio de check-out de um caixa de supermercado seja de três minutos. 
 # Encontre a probabilidade de um check-out do cliente ser concluído pelo caixa em menos de dois minutos.
 
-
+# Média por checkout: 3 min.
+# Taxa de Processamento: 1/3
+# Probabilidade de conclusão: <= 2 min.
+# A taxa de processamento de checkout é igual a uma dividida pelo tempo médio de conclusão da finalização, logo, 1/3
+# Por isso, a taxa de processamento é 1/3 de checkouts por minuto
+# Em seguida, aplicamos a função pexp da distribuição exponencial com taxa = 1/3
+# Neste cenário onde se reduz a taxa de processamento à medida que se reduz o tempo, se aplica uma distribuição exponencial
+?pexp
+pexp(2, rate  = 1/3)
 
 # 6 - Selecione dez números aleatórios entre um e três.
 # Aplicamos a função de geração runif da distribuição uniforme para gerar dez números aleatórios entre um e três.
-
+?runif
+runif(10, min = 1, max = 3)
 
 # 7 - Se houver 12 carros atravessando uma ponte por minuto, em média, 
 # encontre a probabilidade de ter 15 ou mais carros cruzando a ponte em um determinado minuto.
+# A probabilidade de ter 14 ou menos carros atravessando a ponte em um determinado minuto é dada pela função ppois
+# Como a pergunda é sobre 14 carros ou menos, calculamos a cauda inferior
 
+# Lambda = 12
+?ppois
+ppois(14, lambda = 12) # lower tail
+
+# Desta forma, a probabilidade de ter 15 ou mais carros cruzando a ponte em um minuto está na 
+# cauda superior da função de densidade de probabilidade
+ppois(15, lambda = 12, lower.tail = FALSE) # upper tail
 
 
 # 8 - Suponha que haja 12 questões de múltipla escolha em um questionário de inglês. 
