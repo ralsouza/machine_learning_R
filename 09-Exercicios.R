@@ -49,7 +49,7 @@ dev.off()
 # p = 0.08, percentual de pacientes que relataram alívio na experiência anterior
 # n = 10, número total de pacientes na experiência atual
 # dbinom(x, n, p)
-
+?dbinom
 dbinom(7, 10, 0.8)
 # Reposta: A probabilidade que a medicação seja eficaz em exatamente sete pacientes é de 20,13%.
 
@@ -70,6 +70,7 @@ graph(10,0.8)
 # Nota: >= 84
 # Como precisamos analisar as notas dos alunos que tiraram a nota igual ou superior à 84, 
 # estamos interessados na cauda superior da distribuição normal.
+?pnorm
 pnorm(84, mean = 72, sd = 15.2, lower.tail = FALSE)
 
 # 5 - Suponha que o tempo médio de check-out de um caixa de supermercado seja de três minutos. 
@@ -90,15 +91,16 @@ pexp(2, rate  = 1/3)
 ?runif
 runif(10, min = 1, max = 3)
 
-# 7 - Se houver 12 carros atravessando uma ponte por minuto, em média, 
-# encontre a probabilidade de ter 15 ou mais carros cruzando a ponte em um determinado minuto.
-# A probabilidade de ter 14 ou menos carros atravessando a ponte em um determinado minuto é dada pela função ppois
-# Como a pergunda é sobre 14 carros ou menos, calculamos a cauda inferior
+# 7 - Se houver 12 carros atravessando uma ponte por minuto, em média
 
+# Encontre a probabilidade de ter 14 ou menos carros cruzando a ponte em um determinado minuto
+# A solução é dada pela função ppois
+# Como a pergunda é sobre 14 carros ou menos, calculamos a cauda inferior
 # Lambda = 12
 ?ppois
 ppois(14, lambda = 12) # lower tail
 
+# Encontre a probabilidade de ter 15 ou mais carros cruzando a ponte em um determinado minuto.
 # Desta forma, a probabilidade de ter 15 ou mais carros cruzando a ponte em um minuto está na 
 # cauda superior da função de densidade de probabilidade
 ppois(15, lambda = 12, lower.tail = FALSE) # upper tail
