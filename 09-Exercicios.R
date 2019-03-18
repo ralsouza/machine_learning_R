@@ -42,7 +42,7 @@ dev.off()
 
 # 3 - Suponha que 80% dos adultos com alergias relatem alívio sintomático com uma medicação específica. 
 # Se o medicamento é dado a 10 novos pacientes com alergias, qual é a probabilidade de que ele seja 
-# eficaz em exatamente sete?
+# eficaz em "exatamente sete"?
 
 # Esta questão pode ser resolvida com Distribuição Binomial
 # x = Probabilidade eficácia, 7 pacientes
