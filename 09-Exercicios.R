@@ -111,25 +111,26 @@ ppois(15, lambda = 12, lower.tail = FALSE) # upper tail
 # Encontre a probabilidade de ter quatro ou menos respostas corretas se um aluno tentar 
 # responder a cada pergunta aleatoriamente.
 
-# Espaço Amostral, Casos Possíveis: 60
-# Evento, Casos Favoráveis: 12
+# Evento, Casos Favoráveis: 12 questões
+# Espaço Amostral, Casos Possíveis: 60 alternativas por questão
 # Probabilidade do Evento P(evento) = Casos Favoráveis/Casos Possíveis: 12/60 = 0.2
 
 # x = Quantidade de Sucessos
 # n = Casos Favoráveis
 # p = Probabilidade do Evento
-dbinom(4, 12, 0.2)
+dbinom(4, size = 12, prob = 0.2)
 
 # Para encontrar a probabilidade (acumulada) de ter quatro ou menos respostas corretas por tentativas aleatórias, 
 # aplicamos a função dbimon com x = 0,...,4
-dbinom(0, 12, 0.2) +
-  dbinom(1, 12, 0.2) +
-  dbinom(2, 12, 0.2) +
-  dbinom(3, 12, 0.2) +
-  dbinom(4, 12, 0.2)
+dbinom(0, size = 12, prob = 0.2) +
+  dbinom(1, size = 12, prob = 0.2) +
+  dbinom(2, size = 12, prob = 0.2) +
+  dbinom(3, size = 12, prob = 0.2) +
+  dbinom(4, size = 12, prob = 0.2)
   
 # ou então:
-pbinom(4, 12, 0.2)
+pbinom(4, size = 12, prob = 0.2)
+?pbinom
 
 
 
