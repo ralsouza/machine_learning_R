@@ -1,12 +1,12 @@
 ## Exercícios de Estatística
 setwd('/Users/ls_rafael/Documents/GitHub/machine_learning_R')
 
-# 1 - Gere 1000 números de uma distribuição normal com média 3 e sd = .25 e grave no objeto chamado x.
+##### 1 - Gere 1000 números de uma distribuição normal com média 3 e sd = .25 e grave no objeto chamado x #####
 ?rnorm
 x <- rnorm(1000, mean = 3, sd = 0.25)
 print(x)
 
-# 2 - Crie o histograma dos dados gerados no item anterior e adicione uma camada com a curva da normal.
+##### 2 - Crie o histograma dos dados gerados no item anterior e adicione uma camada com a curva da normal #####
 
 # Verificar o coeficiente de simetria
 install.packages('moments')
@@ -40,9 +40,9 @@ png(filename = 'histograma_distribuicao_normal_exercicio_1.png')
 # Rodar o plot antes de fechar o arquivo
 dev.off()
 
-# 3 - Suponha que 80% dos adultos com alergias relatem alívio sintomático com uma medicação específica. 
+#####  3 - Suponha que 80% dos adultos com alergias relatem alívio sintomático com uma medicação específica ##### 
 # Se o medicamento é dado a 10 novos pacientes com alergias, qual é a probabilidade de que ele seja 
-# eficaz em exatamente sete?
+# eficaz em "exatamente sete"?
 
 # Esta questão pode ser resolvida com Distribuição Binomial
 # x = Probabilidade eficácia, 7 pacientes
@@ -61,7 +61,7 @@ graph <- function(n,p){
 }
 graph(10,0.8)
 
-# 4 - Suponha que os resultados dos testes de um vestibular se ajustem a uma distribuição normal. 
+##### 4 - Suponha que os resultados dos testes de um vestibular se ajustem a uma distribuição normal #####  
 # Além disso, a pontuação média do teste é de 72 e o desvio padrão é de 15,2. 
 # Qual é a porcentagem de alunos que pontuaram 84 ou mais no exame?
 
@@ -73,7 +73,7 @@ graph(10,0.8)
 ?pnorm
 pnorm(84, mean = 72, sd = 15.2, lower.tail = FALSE)
 
-# 5 - Suponha que o tempo médio de check-out de um caixa de supermercado seja de três minutos. 
+#####  5 - Suponha que o tempo médio de check-out de um caixa de supermercado seja de três minutos #####  
 # Encontre a probabilidade de um check-out do cliente ser concluído pelo caixa em menos de dois minutos.
 
 # Média por checkout: 3 min.
@@ -86,12 +86,12 @@ pnorm(84, mean = 72, sd = 15.2, lower.tail = FALSE)
 ?pexp
 pexp(2, rate  = 1/3)
 
-# 6 - Selecione dez números aleatórios entre um e três.
+##### 6 - Selecione dez números aleatórios entre um e três ##### 
 # Aplicamos a função de geração runif da distribuição uniforme para gerar dez números aleatórios entre um e três.
 ?runif
 runif(10, min = 1, max = 3)
 
-# 7 - Se houver 12 carros atravessando uma ponte por minuto, em média
+#####  7 - Se houver 12 carros atravessando uma ponte por minuto, em média ##### 
 
 # Encontre a probabilidade de ter 14 ou menos carros cruzando a ponte em um determinado minuto
 # A solução é dada pela função ppois
@@ -106,7 +106,33 @@ ppois(14, lambda = 12) # lower tail
 ppois(15, lambda = 12, lower.tail = FALSE) # upper tail
 
 
-# 8 - Suponha que haja 12 questões de múltipla escolha em um questionário de inglês. 
+##### 8 - Suponha que haja 12 questões de múltipla escolha em um questionário de inglês ##### 
 # Cada questão tem cinco respostas possíveis e apenas uma delas está correta. 
 # Encontre a probabilidade de ter quatro ou menos respostas corretas se um aluno tentar 
 # responder a cada pergunta aleatoriamente.
+
+# Espaço Amostral, Casos Possíveis: 60
+# Evento, Casos Favoráveis: 12
+# Probabilidade do Evento P(evento) = Casos Favoráveis/Casos Possíveis: 12/60 = 0.2
+
+# x = Quantidade de Sucessos
+# n = Casos Favoráveis
+# p = Probabilidade do Evento
+dbinom(4, 12, 0.2)
+
+# Para encontrar a probabilidade (acumulada) de ter quatro ou menos respostas corretas por tentativas aleatórias, 
+# aplicamos a função dbimon com x = 0,...,4
+dbinom(0, 12, 0.2) +
+  dbinom(1, 12, 0.2) +
+  dbinom(2, 12, 0.2) +
+  dbinom(3, 12, 0.2) +
+  dbinom(4, 12, 0.2)
+  
+# ou então:
+pbinom(4, 12, 0.2)
+
+
+
+
+
+
