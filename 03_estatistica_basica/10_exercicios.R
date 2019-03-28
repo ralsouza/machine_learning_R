@@ -6,18 +6,13 @@
 # Configurando o diretório de trabalho
 # Coloque entre aspas o diretório de trabalho que você está usando no seu computador
 # Não use diretórios com espaço no nome
-setwd("C:/FCD/BigDataRAzure/Cap11")
+setwd('/Users/ls_rafael/Documents/GitHub/machine_learning_R/03_estatistica_basica')
 getwd()
 
-
 # Pacotes
-install.packages("dplyr")
 install.packages('nycflights13')
-library('ggplot2')
-library('dplyr')
 library('nycflights13')
-View(flights)
-?flights
+flights
 
 # Definindo o Problema de Negócio
 # Crie um teste de hipótese para verificar se os voos da Delta Airlines (DL)
@@ -34,7 +29,9 @@ View(flights)
 # O dataset deve conter apenas duas colunas, nome da companhia e atraso nos voos de chegada.
 # Os dados devem ser extraídos do dataset flights para construir o dataset pop_data
 # Vamos considerar este dataset como sendo nossa população de voos
-
+?flights
+dim(flights)
+flights[1:3,15:19]
 
 
 # Exercício 2  - Crie duas amostras de 1000 observações cada uma a partir do 
