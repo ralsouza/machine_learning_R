@@ -39,13 +39,19 @@ flights[1:3,15:19]
 ##### 2 - CARREGANDO OS DADOS ####
 pop_data <- flights %>% 
                 select(carrier, arr_delay) %>% 
-                filter(carrier == 'UA')
+                filter(carrier == 'UA' | carrier == 'DL')
 
 dim(pop_data) # 58.665 x 2
 
 # Exercício 2  - Crie duas amostras de 1000 observações cada uma a partir do 
 # dataset pop_data apenas com dados da companhia DL para amostra 1 e apenas dados 
 # da companhia UA na amostra 2
+sample_UA <- pop_data[sample(nrow(pop_data), 1000, replace = FALSE), ] %>% 
+                  filter(carrier == 'UA')
+
+
+
+
 
 # Dica: inclua uma coluna chamada sample_id preenchida com número 1 para a primeira 
 # amostra e 2 para a segunda amostra
