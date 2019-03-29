@@ -11,7 +11,8 @@ getwd()
 
 # Pacotes
 install.packages('nycflights13')
-library('nycflights13')
+library(nycflights13)
+library(dplyr)
 flights
 
 # Definindo o Problema de Negócio
@@ -29,10 +30,18 @@ flights
 # O dataset deve conter apenas duas colunas, nome da companhia e atraso nos voos de chegada.
 # Os dados devem ser extraídos do dataset flights para construir o dataset pop_data
 # Vamos considerar este dataset como sendo nossa população de voos
+
+##### 1 - EXPLORANDO OS DADOS ####
 ?flights
-dim(flights)
+dim(flights) # 3367.776 x 19
 flights[1:3,15:19]
 
+##### 2 - CARREGANDO OS DADOS ####
+pop_data <- flights %>% 
+                select(carrier, arr_delay) %>% 
+                filter(carrier == 'UA')
+
+dim(pop_data) # 58.665 x 2
 
 # Exercício 2  - Crie duas amostras de 1000 observações cada uma a partir do 
 # dataset pop_data apenas com dados da companhia DL para amostra 1 e apenas dados 
