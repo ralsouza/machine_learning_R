@@ -13,6 +13,7 @@ getwd()
 install.packages('nycflights13')
 library(nycflights13)
 library(dplyr)
+library(tidyr)
 flights
 
 # Definindo o Problema de Negócio
@@ -53,18 +54,23 @@ dim(pop_data) # 106.775 x 2
 
 # Separar a população das empresas em dois data frames
 pop_data_UA <- pop_data %>% 
-                  filter(carrier == 'UA') 
+               filter(carrier == 'UA') %>% 
+               drop_na()
 
 pop_data_DL <- pop_data %>% 
-                  filter(carrier == 'DL') 
+               filter(carrier == 'DL') %>% 
+               drop_na()
 
 # Coletar 1000 amostras aleatórias
-sample_UA <- pop_data_UA[sample(nrow(pop_data_UA), 1000), ] %>% 
-                mutate(sample_id = 1)
-
 sample_DL <- pop_data_DL[sample(nrow(pop_data_DL), 1000), ] %>% 
-                mutate(sample_id = 2)
+             mutate(sample_id = 1) 
 
+View(sample_DL)
+
+sample_UA <- pop_data_UA[sample(nrow(pop_data_UA), 1000), ] %>% 
+             mutate(sample_id = 2)
+
+View(sample_UA)
 
 # Exercício 3 - Crie um dataset contendo os dados das 2 amostras criadas no item anterior. 
 
