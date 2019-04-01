@@ -41,21 +41,29 @@ pop_data <- flights %>%
                 select(carrier, arr_delay) %>% 
                 filter(carrier == 'UA' | carrier == 'DL')
 
-dim(pop_data) # 58.665 x 2
+dim(pop_data) # 106.775 x 2
 
 # Exercício 2  - Crie duas amostras de 1000 observações cada uma a partir do 
 # dataset pop_data apenas com dados da companhia DL para amostra 1 e apenas dados 
 # da companhia UA na amostra 2
-sample_UA <- pop_data[sample(nrow(pop_data), 1000, replace = FALSE), ] %>% 
-                  filter(carrier == 'UA')
-
-
-
-
 
 # Dica: inclua uma coluna chamada sample_id preenchida com número 1 para a primeira 
 # amostra e 2 para a segunda amostra
+?sample
 
+# Separar a população das empresas em dois data frames
+pop_data_UA <- pop_data %>% 
+                  filter(carrier == 'UA') 
+
+pop_data_DL <- pop_data %>% 
+                  filter(carrier == 'DL') 
+
+# Coletar 1000 amostras aleatórias
+sample_UA <- pop_data_UA[sample(nrow(pop_data_UA), 1000), ] %>% 
+                mutate(sample_id = 1)
+
+sample_DL <- pop_data_DL[sample(nrow(pop_data_DL), 1000), ] %>% 
+                mutate(sample_id = 2)
 
 
 # Exercício 3 - Crie um dataset contendo os dados das 2 amostras criadas no item anterior. 
