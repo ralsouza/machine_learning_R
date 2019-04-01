@@ -73,7 +73,11 @@ sample_UA <- pop_data_UA[sample(nrow(pop_data_UA), 1000), ] %>%
 View(sample_UA)
 
 # Exercício 3 - Crie um dataset contendo os dados das 2 amostras criadas no item anterior. 
+?rbind
 
+sample_pop_data <- rbind(sample_DL, sample_UA)
+
+View(sample_pop_data)
 
 
 # Exercício 4 - Calcule o intervalo de confiança (95%) da amostra1
