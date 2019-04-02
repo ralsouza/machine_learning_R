@@ -81,26 +81,14 @@ View(sample_pop_data)
 
 
 # Exercício 4 - Calcule o intervalo de confiança (95%) da amostra1
-
-# Vamos utilizar os conceitos apresentados no site https://rpubs.com/diogoprov/IC95, a partir da seção 4.1
-# Conceitos Chave:
-#   - Parâmetro = são características da população;
-#   - Estimador pontual = um único valor calculado de uma amostra que estima um dado parâmetro;
-#   - Estatística = são características da amostra.
-
-
-
-
-
 # Usamos a fórmula: erro_padrao_amostra1 = sd(amostra1$arr_delay) / sqrt(nrow(amostra1))
-
 # Esta fórmula é usada para calcular o desvio padrão de uma distribuição da média amostral
 # (de um grande número de amostras de uma população). Em outras palavras, só é aplicável 
 # quando você está procurando o desvio padrão de médias calculadas a partir de uma amostra de 
 # tamanho n𝑛, tirada de uma população.
 
 # Digamos que você obtenha 10.000 amostras de uma população qualquer com um tamanho de amostra de n = 2.
-# Então calculamos as médias de cada uma dessas amostras (teremos 10000 médias calculadas).
+# Então calculamos as médias de cada uma dessas amostras (teremos 10.000 médias calculadas).
 # A equação acima informa que, com um número de amostras grande o suficiente, o desvio padrão das médias 
 # da amostra pode ser aproximado usando esta fórmula: sd(amostra) / sqrt(nrow(amostra))
   
@@ -114,13 +102,31 @@ View(sample_pop_data)
 # e atende a condição de independência n <= 10% do tamanho da população.
 
 # Erro padrão
-erro_padrao_amostra1 = sd(amostra1$arr_delay) / sqrt(nrow(amostra1))
+erro_padrao_sample_DL = sd(sample_DL$arr_delay) / sqrt(nrow(sample_DL))
 
 # Limites inferior e superior
 # 1.96 é o valor de z score para 95% de confiança
+# Intervalos de confiança e Nível de significância
+# IC = 90%, 𝜶 = 0.10
+# IC = 95%, 𝜶 = 0.05
+# IC = 99%, 𝜶 = 0.01�5𝜶 = 𝜶 = 0.00.05
 
+# 0.05/2 = upper 0.025 lower 0.025
+# Olhando na tabela z, .0250 = 1.96, logo os valores de Z são -1.96 e 1.96
+( 2.575 * 1.5) + 25 # = 28.86
+(-2.575 * 1.5) + 25 # = 21.14 
+
+# Desvio Padrão
+sd(sample_DL$arr_delay) # 38.44438
+
+# Média da Amostra
+mean(sample_DL$arr_delay) # 0.316
+
+upper.tail = ( 1.96 * sd(sample_DL$arr_delay)) + mean(sample_DL$arr_delay) #  75.66698
+lower.tail = (-1.96 * sd(sample_DL$arr_delay)) + mean(sample_DL$arr_delay) # -75.03498
 
 # Intervalo de confiança
+
 
 
 
