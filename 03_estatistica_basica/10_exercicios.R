@@ -82,6 +82,16 @@ View(sample_pop_data)
 
 # Exercício 4 - Calcule o intervalo de confiança (95%) da amostra1
 
+# Vamos utilizar os conceitos apresentados no site https://rpubs.com/diogoprov/IC95, a partir da seção 4.1
+# Conceitos Chave:
+#   - Parâmetro = são características da população;
+#   - Estimador pontual = um único valor calculado de uma amostra que estima um dado parâmetro;
+#   - Estatística = são características da amostra.
+
+
+
+
+
 # Usamos a fórmula: erro_padrao_amostra1 = sd(amostra1$arr_delay) / sqrt(nrow(amostra1))
 
 # Esta fórmula é usada para calcular o desvio padrão de uma distribuição da média amostral
@@ -89,7 +99,7 @@ View(sample_pop_data)
 # quando você está procurando o desvio padrão de médias calculadas a partir de uma amostra de 
 # tamanho n𝑛, tirada de uma população.
 
-# Digamos que você obtenha 10000 amostras de uma população qualquer com um tamanho de amostra de n = 2.
+# Digamos que você obtenha 10.000 amostras de uma população qualquer com um tamanho de amostra de n = 2.
 # Então calculamos as médias de cada uma dessas amostras (teremos 10000 médias calculadas).
 # A equação acima informa que, com um número de amostras grande o suficiente, o desvio padrão das médias 
 # da amostra pode ser aproximado usando esta fórmula: sd(amostra) / sqrt(nrow(amostra))
