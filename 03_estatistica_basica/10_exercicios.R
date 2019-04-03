@@ -122,12 +122,10 @@ sd(sample_DL$arr_delay) # 38.44438
 # Média da Amostra
 mean(sample_DL$arr_delay) # 0.316
 
-upper.tail = ( 1.96 * sd(sample_DL$arr_delay)) + mean(sample_DL$arr_delay) #  75.66698
-lower.tail = (-1.96 * sd(sample_DL$arr_delay)) + mean(sample_DL$arr_delay) # -75.03498
+upper_tail <-  ( 1.96 * sd(sample_DL$arr_delay)) + mean(sample_DL$arr_delay) #  75.66698
+lower_tail <-  (-1.96 * sd(sample_DL$arr_delay)) + mean(sample_DL$arr_delay) # -75.03498
 
 # Intervalo de confiança
-
-
 
 
 # Exercício 5 - Calcule o intervalo de confiança (95%) da amostra2
