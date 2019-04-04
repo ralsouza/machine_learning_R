@@ -118,28 +118,57 @@ erro_padrao_sample_DL = sd(sample_DL$arr_delay) / sqrt(nrow(sample_DL)) # 1.2157
 ( 2.575 * 1.5) + 25 # = 28.86
 (-2.575 * 1.5) + 25 # = 21.14 
 
-upper_tail_DL <- ( 1.96 * erro_padrao_sample_DL) + mean(sample_DL$arr_delay) #  2.698807
-lower_tail_DL <- (-1.96 * erro_padrao_sample_DL) + mean(sample_DL$arr_delay) # -2.066807
+upper_tail_DL <- ( 1.96 * erro_padrao_sample_DL) + mean(sample_DL$arr_delay) 
+lower_tail_DL <- (-1.96 * erro_padrao_sample_DL) + mean(sample_DL$arr_delay)
 
 # Intervalo de confiança
-ic_DL <- c(lower_tail_DL, upper_tail_DL)
-ic_DL # -2.066807  2.698807
+ic_DL <- data.frame(ic_dl = c(lower_tail_DL, upper_tail_DL))
+ic_DL 
 
 # Exercício 5 - Calcule o intervalo de confiança (95%) da amostra sample_UA
 # Erro padrão
-erro_padrao_sample_UA = sd(sample_UA$arr_delay) / sqrt(nrow(sample_UA)) # 1.446486
+erro_padrao_sample_UA = sd(sample_UA$arr_delay) / sqrt(nrow(sample_UA)) 
 
-upper_tail_UA <- ( 1.96 * erro_padrao_sample_UA) + mean(sample_UA$arr_delay) # 8.212114
-lower_tail_UA <- (-1.96 * erro_padrao_sample_UA) + mean(sample_UA$arr_delay) # 2.541886
+upper_tail_UA <- ( 1.96 * erro_padrao_sample_UA) + mean(sample_UA$arr_delay) 
+lower_tail_UA <- (-1.96 * erro_padrao_sample_UA) + mean(sample_UA$arr_delay) 
 
 # Intervalo de confiança
-ic_UA <- c(lower_tail_UA, upper_tail_UA)
-ic_UA # 2.541886 8.212114
+ic_UA <- data.frame(ic_ua = c(lower_tail_UA, upper_tail_UA))
+ic_UA 
 
 # Exercício 6 - Crie um plot Visualizando os intervalos de confiança criados nos itens anteriores
 # Dica: Use o geom_point() e geom_errorbar() do pacote ggplot2
-ggplot(data = as.data.frame(ic_DL),
-       mapping = aes(ic_DL,sum)) + geom_point()
+# Juntando tudo
+df.dl <- sample_DL %>% 
+  group_by(carrier) %>% 
+  summarise(
+    n = n(),
+    media = mean(sample_DL$arr_delay),
+    desvio_padrao = sd(sample_DL$arr_delay)
+  ) %>% 
+  mutate(lower_tail = (-1.96 * erro_padrao_sample_DL) + mean(sample_DL$arr_delay)) %>% 
+  mutate(upper_tail= ( 1.96 * erro_padrao_sample_DL) + mean(sample_DL$arr_delay)) %>% 
+  mutate(erro_padrao = sd(sample_DL$arr_delay) / sqrt(n)) %>% 
+  mutate(intevalo_confianca = erro_padrao * qt((1 - 0.05) / 2 + .5, n - 1 ))
+
+df.ua <- sample_UA %>% 
+  group_by(carrier) %>% 
+  summarise(
+    n = n(),
+    media = mean(sample_UA$arr_delay),
+    desvio_padrao = sd(sample_UA$arr_delay)
+  ) %>% 
+  mutate(lower_tail = (-1.96 * erro_padrao_sample_UA) + mean(sample_UA$arr_delay)) %>% 
+  mutate(upper_tail= ( 1.96 * erro_padrao_sample_UA) + mean(sample_UA$arr_delay)) %>% 
+  mutate(erro_padrao = sd(sample_UA$arr_delay) / sqrt(n)) %>% 
+  mutate(intevalo_confianca = erro_padrao * qt((1 - 0.05) / 2 + .5, n - 1 ))
+
+df.carriers <- rbind(df.dl, df.ua)
+
+
+ggplot(data = ic_DL) + 
+  geom_point(aes(x = ic_dl, y = ic_dl)) +
+  geom_errorbar(aes(ic_DL, ymin = ic_dl - erro_padrao_sample_DL, ymax = ic_dl - erro_padrao_sample_DL))
 
 # Exercício 7 - Podemos dizer que muito provavelmente, as amostras vieram da mesma população? 
 # Por que?
