@@ -166,9 +166,9 @@ df.ua <- sample_UA %>%
 df.carriers <- rbind(df.dl, df.ua)
 
 
-ggplot(data = ic_DL) + 
-  geom_point(aes(x = ic_dl, y = ic_dl)) +
-  geom_errorbar(aes(ic_DL, ymin = ic_dl - erro_padrao_sample_DL, ymax = ic_dl - erro_padrao_sample_DL))
+ggplot(data = df.carriers) + 
+  geom_point(aes(x = df.carriers$lower_tail, y = df.carriers$upper_tail)) +
+  geom_errorbar(aes(x = df.carriers, ymin = df.carriers$media - df.carriers$intevalo_confianca, ymax = df.carriers$media + df.carriers$intevalo_confianca))
 
 # Exercício 7 - Podemos dizer que muito provavelmente, as amostras vieram da mesma população? 
 # Por que?
