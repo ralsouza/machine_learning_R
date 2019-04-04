@@ -80,7 +80,7 @@ sample_pop_data <- rbind(sample_DL, sample_UA)
 View(sample_pop_data)
 
 
-# Exercício 4 - Calcule o intervalo de confiança (95%) da amostra1
+# Exercício 4 - Calcule o intervalo de confiança (95%) da amostra sample_DL
 # Usamos a fórmula: erro_padrao_amostra1 = sd(amostra1$arr_delay) / sqrt(nrow(amostra1))
 # Esta fórmula é usada para calcular o desvio padrão de uma distribuição da média amostral
 # (de um grande número de amostras de uma população). Em outras palavras, só é aplicável 
@@ -126,9 +126,10 @@ upper_tail <-  ( 1.96 * sd(sample_DL$arr_delay)) + mean(sample_DL$arr_delay) #  
 lower_tail <-  (-1.96 * sd(sample_DL$arr_delay)) + mean(sample_DL$arr_delay) # -75.03498
 
 # Intervalo de confiança
+ic <- c(lower_tail, upper_tail)
+ic
 
-
-# Exercício 5 - Calcule o intervalo de confiança (95%) da amostra2
+# Exercício 5 - Calcule o intervalo de confiança (95%) da amostra sample_UA
 
 
 
