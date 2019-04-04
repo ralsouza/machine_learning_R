@@ -102,7 +102,7 @@ View(sample_pop_data)
 # e atende a condição de independência n <= 10% do tamanho da população.
 
 # Erro padrão
-erro_padrao_sample_DL = sd(sample_DL$arr_delay) / sqrt(nrow(sample_DL))
+erro_padrao_sample_DL = sd(sample_DL$arr_delay) / sqrt(nrow(sample_DL)) # 1.215718
 
 # Limites inferior e superior
 # 1.96 é o valor de z score para 95% de confiança
@@ -113,25 +113,27 @@ erro_padrao_sample_DL = sd(sample_DL$arr_delay) / sqrt(nrow(sample_DL))
 
 # 0.05/2 = upper 0.025 lower 0.025
 # Olhando na tabela z, .0250 = 1.96, logo os valores de Z são -1.96 e 1.96
+# Exemplo Apresentação
 ( 2.575 * 1.5) + 25 # = 28.86
 (-2.575 * 1.5) + 25 # = 21.14 
 
-# Desvio Padrão
-sd(sample_DL$arr_delay) # 38.44438
-
-# Média da Amostra
-mean(sample_DL$arr_delay) # 0.316
-
-upper_tail <-  ( 1.96 * sd(sample_DL$arr_delay)) + mean(sample_DL$arr_delay) #  75.66698
-lower_tail <-  (-1.96 * sd(sample_DL$arr_delay)) + mean(sample_DL$arr_delay) # -75.03498
+upper_tail_DL <- ( 1.96 * erro_padrao_sample_DL) + mean(sample_DL$arr_delay) #  2.698807
+lower_tail_DL <- (-1.96 * erro_padrao_sample_DL) + mean(sample_DL$arr_delay) # -2.066807
 
 # Intervalo de confiança
-ic <- c(lower_tail, upper_tail)
-ic
+ic_DL <- c(lower_tail_DL, upper_tail_DL)
+ic_DL # -2.066807  2.698807
 
 # Exercício 5 - Calcule o intervalo de confiança (95%) da amostra sample_UA
+# Erro padrão
+erro_padrao_sample_UA = sd(sample_UA$arr_delay) / sqrt(nrow(sample_UA)) # 1.446486
 
+upper_tail_UA <- ( 1.96 * erro_padrao_sample_UA) + mean(sample_UA$arr_delay) # 8.212114
+lower_tail_UA <- (-1.96 * erro_padrao_sample_UA) + mean(sample_UA$arr_delay) # 2.541886
 
+# Intervalo de confiança
+ic_UA <- c(lower_tail_UA, upper_tail_UA)
+ic_UA # 2.541886 8.212114
 
 # Exercício 6 - Crie um plot Visualizando os intervalos de confiança criados nos itens anteriores
 # Dica: Use o geom_point() e geom_errorbar() do pacote ggplot2
