@@ -14,6 +14,7 @@ install.packages('nycflights13')
 library(nycflights13)
 library(dplyr)
 library(tidyr)
+library(ggplot2)
 flights
 
 # Definindo o Problema de Negócio
@@ -137,8 +138,8 @@ ic_UA # 2.541886 8.212114
 
 # Exercício 6 - Crie um plot Visualizando os intervalos de confiança criados nos itens anteriores
 # Dica: Use o geom_point() e geom_errorbar() do pacote ggplot2
-
-
+ggplot(data = as.data.frame(ic_DL),
+       mapping = aes(ic_DL,sum)) + geom_point()
 
 # Exercício 7 - Podemos dizer que muito provavelmente, as amostras vieram da mesma população? 
 # Por que?
