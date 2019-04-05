@@ -171,12 +171,22 @@ ggplot(df.carriers) +
   geom_errorbar(aes(x = carrier, ymin = lower_tail, ymax = upper_tail), width = .1)
 
 # Exercício 7 - Podemos dizer que muito provavelmente, as amostras vieram da mesma população? 
-# Por que?
-
-
-
+# Por que? Sim. Pois parte dos dados de ambas amostras estão no mesmo intervalo de confiança.
+ 
 # Exercício 8 - Crie um teste de hipótese para verificar se os voos da Delta Airlines (DL)
 # atrasam mais do que os voos da UA (United Airlines)
-
 # H0 e H1 devem ser mutuamente exclusivas.
+
+# H0: 
+# H1: 
+
+
+
+
+
+
+
+
+
+
 
