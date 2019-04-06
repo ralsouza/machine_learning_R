@@ -177,13 +177,39 @@ ggplot(df.carriers) +
 # atrasam mais do que os voos da UA (United Airlines)
 # H0 e H1 devem ser mutuamente exclusivas.
 
-# H0: 
-# H1: 
+# H0: Tempo médio de chegada da Delta Airlines é igual que a média de chegada da United Airlines.
+#     arr_delay: DL = arr_delay UA
+# H1: Tempo médio de chegada da Delta Airlines é maior que a média de chegada da United Airlines.
+#     arr_delay: DL > arr_delay UA
 
+# Coletar 1000 amostras aleatórias
+sample_hip_DL <- pop_data_DL[sample(nrow(pop_data_DL), 1000), ] %>% 
+  mutate(sample_id = 1) 
 
+View(sample_DL)
 
+sample_hip_UA <- pop_data_UA[sample(nrow(pop_data_UA), 1000), ] %>% 
+  mutate(sample_id = 2)
 
+View(sample_UA)
 
+# Erro padrão
+ep_amostra_DL_hip = sd(sample_hip_DL$arr_delay) / sqrt(nrow(sample_hip_DL))
+
+ep_amostra_UA_hip = sd(sample_hip_UA$arr_delay) / sqrt(nrow(sample_hip_UA))
+
+upper_tail_hip_DL <- ( 1.96 * ep_amostra_DL_hip) + mean(sample_hip_DL$arr_delay) 
+lower_tail_hip_DL <- (-1.96 * ep_amostra_DL_hip) + mean(sample_hip_DL$arr_delay)
+
+upper_tail_hip_UA <- ( 1.96 * ep_amostra_UA_hip) + mean(sample_hip_UA$arr_delay) 
+lower_tail_hip_UA <- (-1.96 * ep_amostra_UA_hip) + mean(sample_hip_UA$arr_delay)
+
+# Intervalo de confiança
+ic_HIP_UA <- data.frame(ic_hip_ua = c(lower_tail_hip_UA, upper_tail_hip_UA))
+ic_HIP_UA 
+
+ic_HIP_DL <- data.frame(ic_hip_dl = c(lower_tail_hip_DL, upper_tail_hip_DL))
+ic_HIP_DL
 
 
 
