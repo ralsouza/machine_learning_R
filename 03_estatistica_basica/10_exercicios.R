@@ -178,9 +178,9 @@ ggplot(df.carriers) +
 # H0 e H1 devem ser mutuamente exclusivas.
 
 # H0: Tempo médio de chegada da Delta Airlines é igual que a média de chegada da United Airlines.
-#     arr_delay: DL <= arr_delay UA
+#     arr_delay: DL <= UA
 # H1: Tempo médio de chegada da Delta Airlines é maior que a média de chegada da United Airlines.
-#     arr_delay: DL > arr_delay UA
+#     arr_delay: DL > UA
 
 # Coletar 1000 amostras aleatórias
 sample_hip_DL <- pop_data_DL[sample(nrow(pop_data_DL), 1000), ] %>% 
@@ -196,33 +196,15 @@ View(sample_UA)
 ?rnorm
 hist(rnorm(sample_hip_DL$arr_delay))
 
-# Erro padrão
-ep_amostra_DL_hip = sd(sample_hip_DL$arr_delay) / sqrt(nrow(sample_hip_DL))
-mean(sample_hip_DL$arr_delay)
-
-ep_amostra_UA_hip = sd(sample_hip_UA$arr_delay) / sqrt(nrow(sample_hip_UA))
-mean(sample_hip_UA$arr_delay)
-
-upper_tail_hip_DL <- ( 1.96 * ep_amostra_DL_hip) + mean(sample_hip_DL$arr_delay) 
-lower_tail_hip_DL <- (-1.96 * ep_amostra_DL_hip) + mean(sample_hip_DL$arr_delay)
-
-upper_tail_hip_UA <- ( 1.96 * ep_amostra_UA_hip) + mean(sample_hip_UA$arr_delay) 
-lower_tail_hip_UA <- (-1.96 * ep_amostra_UA_hip) + mean(sample_hip_UA$arr_delay)
-
-# Intervalo de confiança
-ic_HIP_UA <- data.frame(ic_hip_ua = c(lower_tail_hip_UA, upper_tail_hip_UA))
-ic_HIP_UA 
-
-ic_HIP_DL <- data.frame(ic_hip_dl = c(lower_tail_hip_DL, upper_tail_hip_DL))
-ic_HIP_DL
-
 # Teste t
 ?t.test
 
-t.test(sample_hip_DL$arr_delay, sample_hip_UA$arr_delay, alternative = 'two.sided')
-t.test(sample_hip_DL$arr_delay, sample_hip_UA$arr_delay, alternative = 'less')
+# Como o sinal de condição do H1 é >, a Região Crítica é unicaldal à direita
+# Ver vídeo de do passo a passo nas anotações o iCloud
 t.test(sample_hip_DL$arr_delay, sample_hip_UA$arr_delay, alternative = 'greater')
 
-
+# Para usar o P-Valor na decisão de um teste de hipótese, basta compararmos o P-Valor com:
+#  1. Se P-Valor <= a, então rejeitamos H0
+#  2. Se P-Valor > a, então aceitamos H0
 
 
