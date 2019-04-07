@@ -217,6 +217,11 @@ ic_HIP_DL <- data.frame(ic_hip_dl = c(lower_tail_hip_DL, upper_tail_hip_DL))
 ic_HIP_DL
 
 # Teste t
+?t.test
+
+t.test(sample_hip_DL$arr_delay, sample_hip_UA$arr_delay, alternative = 'two.sided')
+t.test(sample_hip_DL$arr_delay, sample_hip_UA$arr_delay, alternative = 'less')
+t.test(sample_hip_DL$arr_delay, sample_hip_UA$arr_delay, alternative = 'greater')
 
 
 
