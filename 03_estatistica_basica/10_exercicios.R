@@ -178,7 +178,7 @@ ggplot(df.carriers) +
 # H0 e H1 devem ser mutuamente exclusivas.
 
 # H0: Tempo médio de chegada da Delta Airlines é igual que a média de chegada da United Airlines.
-#     arr_delay: DL = arr_delay UA
+#     arr_delay: DL <= arr_delay UA
 # H1: Tempo médio de chegada da Delta Airlines é maior que a média de chegada da United Airlines.
 #     arr_delay: DL > arr_delay UA
 
