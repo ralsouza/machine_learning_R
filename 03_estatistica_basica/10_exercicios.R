@@ -193,10 +193,15 @@ sample_hip_UA <- pop_data_UA[sample(nrow(pop_data_UA), 1000), ] %>%
 
 View(sample_UA)
 
+?rnorm
+hist(rnorm(sample_hip_DL$arr_delay))
+
 # Erro padrão
 ep_amostra_DL_hip = sd(sample_hip_DL$arr_delay) / sqrt(nrow(sample_hip_DL))
+mean(sample_hip_DL$arr_delay)
 
 ep_amostra_UA_hip = sd(sample_hip_UA$arr_delay) / sqrt(nrow(sample_hip_UA))
+mean(sample_hip_UA$arr_delay)
 
 upper_tail_hip_DL <- ( 1.96 * ep_amostra_DL_hip) + mean(sample_hip_DL$arr_delay) 
 lower_tail_hip_DL <- (-1.96 * ep_amostra_DL_hip) + mean(sample_hip_DL$arr_delay)
@@ -211,7 +216,7 @@ ic_HIP_UA
 ic_HIP_DL <- data.frame(ic_hip_dl = c(lower_tail_hip_DL, upper_tail_hip_DL))
 ic_HIP_DL
 
-
+# Teste t
 
 
 
