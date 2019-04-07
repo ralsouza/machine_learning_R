@@ -196,6 +196,13 @@ View(sample_UA)
 ?rnorm
 hist(rnorm(sample_hip_DL$arr_delay))
 
+# Erro padrão
+ep_amostra_DL_hip = sd(sample_hip_DL$arr_delay) / sqrt(nrow(sample_hip_DL))
+mean(sample_hip_DL$arr_delay)
+
+ep_amostra_UA_hip = sd(sample_hip_UA$arr_delay) / sqrt(nrow(sample_hip_UA))
+mean(sample_hip_UA$arr_delay)
+
 # Teste t
 ?t.test
 
@@ -203,8 +210,17 @@ hist(rnorm(sample_hip_DL$arr_delay))
 # Ver vídeo de do passo a passo nas anotações o iCloud
 t.test(sample_hip_DL$arr_delay, sample_hip_UA$arr_delay, alternative = 'greater')
 
+# Quando a análise for pelo P-Valor
 # Para usar o P-Valor na decisão de um teste de hipótese, basta compararmos o P-Valor com:
 #  1. Se P-Valor <= a, então rejeitamos H0
 #  2. Se P-Valor > a, então aceitamos H0
 
+# Quando a análise for pela Região Crítica
+# 1. Se o valor observado pertencer à Região Crítica, então Rejeitar H0 (Aceitar HA)
+# 2. Se o valor observado não pertencer à Região Crítica, então Aceitar H0 (Rejeitar HA)
+
+# Conclusão do Teste de Hipótese
+# p-value = 0.9709, logo > que a=0.05
+# Não temos evidências suficientes para rejeitar a hipósete nula, ou seja, nos dados analisados não há
+# evidências suficientes que indiquem que DL atrase mais que UA.
 
