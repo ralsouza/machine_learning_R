@@ -41,7 +41,8 @@ flights[1:3,15:19]
 ##### 2 - CARREGANDO OS DADOS ####
 pop_data <- flights %>% 
                 select(carrier, arr_delay) %>% 
-                filter(carrier == 'UA' | carrier == 'DL')
+                filter(carrier == 'UA' | carrier == 'DL') %>% 
+                drop_na()
 
 dim(pop_data) # 106.775 x 2
 
@@ -55,12 +56,10 @@ dim(pop_data) # 106.775 x 2
 
 # Separar a população das empresas em dois data frames
 pop_data_UA <- pop_data %>% 
-               filter(carrier == 'UA') %>% 
-               drop_na()
+               filter(carrier == 'UA') 
 
 pop_data_DL <- pop_data %>% 
-               filter(carrier == 'DL') %>% 
-               drop_na()
+               filter(carrier == 'DL') 
 
 # Coletar 1000 amostras aleatórias
 sample_DL <- pop_data_DL[sample(nrow(pop_data_DL), 1000), ] %>% 
@@ -199,25 +198,42 @@ hist(rnorm(sample_hip_DL$arr_delay))
 # Erro padrão
 ep_amostra_DL_hip = sd(sample_hip_DL$arr_delay) / sqrt(nrow(sample_hip_DL))
 mean(sample_hip_DL$arr_delay)
+# 0.661
 
 ep_amostra_UA_hip = sd(sample_hip_UA$arr_delay) / sqrt(nrow(sample_hip_UA))
 mean(sample_hip_UA$arr_delay)
+# 4.661
+
+# Desvio padrão da população
+sd(pop_data$arr_delay)
+# 42.57368
 
 # Teste t
 ?t.test
 
 # Como o sinal de condição do H1 é >, a Região Crítica é unicaldal à direita
 # Ver vídeo de do passo a passo nas anotações o iCloud
-t.test(sample_hip_DL$arr_delay, sample_hip_UA$arr_delay, alternative = 'greater')
-
 # Quando a análise for pelo P-Valor
 # Para usar o P-Valor na decisão de um teste de hipótese, basta compararmos o P-Valor com:
 #  1. Se P-Valor <= a, então rejeitamos H0
 #  2. Se P-Valor > a, então aceitamos H0
+t.test(sample_hip_DL$arr_delay, sample_hip_UA$arr_delay, alternative = 'greater')
+# p-value = 0.9709
 
 # Quando a análise for pela Região Crítica
 # 1. Se o valor observado pertencer à Região Crítica, então Rejeitar H0 (Aceitar HA)
 # 2. Se o valor observado não pertencer à Região Crítica, então Aceitar H0 (Rejeitar HA)
+
+# Zobs
+sd_hip <- sd(pop_data$arr_delay) / sqrt(nrow(sample_hip_UA))
+z_obs <- (mean(sample_hip_DL$arr_delay) - mean(sample_hip_UA$arr_delay)) / sd_hip
+
+
+
+
+
+
+
 
 # Conclusão do Teste de Hipótese
 # p-value = 0.9709, logo > que a=0.05
