@@ -221,8 +221,8 @@ sd(pop_data$arr_delay)
 # Ver vídeo de do passo a passo nas anotações o iCloud
 # Quando a análise for pelo P-Valor
 # Para usar o P-Valor na decisão de um teste de hipótese, basta compararmos o P-Valor com:
-#  1. Se P-Valor <= a, então rejeitamos H0
-#  2. Se P-Valor > a, então aceitamos H0
+#  1. Se P-Valor <= a, então rejeitamos H0 - Baixo valor p: forte evidência empírica contra h0
+#  2. Se P-Valor > a, então aceitamos H0 - Alto valor p: pouca ou nenhuma evidência empírica contra h0
 
 # Valor p
 # O valor-p é uma quantificação da probabilidade de se errar ao rejeitar H0 e a mesma
