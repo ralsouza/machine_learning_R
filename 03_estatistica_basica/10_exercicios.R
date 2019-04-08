@@ -209,6 +209,12 @@ sd(pop_data$arr_delay)
 # 42.57368
 
 # Teste t
+# O teste t (de Student) foi desenvolvido por Willian Sealy Gosset em 1908 que usou o
+# pseudônimo “Student” em função da confidencialidade requerida por seu empregador
+# (cervejaria Guiness) que considerava o uso de estatística na manutenção da qualidade como
+# uma vantagem competitiva.
+# O teste t de Student tem diversas variações de aplicação, e pode ser usado na comparação 
+# de duas (e somente duas) médias e as variações dizem respeito às hipóteses que são testadas
 ?t.test
 
 # Como o sinal de condição do H1 é >, a Região Crítica é unicaldal à direita
@@ -217,26 +223,50 @@ sd(pop_data$arr_delay)
 # Para usar o P-Valor na decisão de um teste de hipótese, basta compararmos o P-Valor com:
 #  1. Se P-Valor <= a, então rejeitamos H0
 #  2. Se P-Valor > a, então aceitamos H0
-t.test(sample_hip_DL$arr_delay, sample_hip_UA$arr_delay, alternative = 'greater')
-# p-value = 0.9709
 
+# Valor p
+# O valor-p é uma quantificação da probabilidade de se errar ao rejeitar H0 e a mesma
+# decorre da distribuição estatística adotada.
+# Se o valor-p é menor que o nível de significância, conclui-se que o correto é rejeitar a
+# hipótese de nulidade.
+
+# Valor p é a probabiblidade de que a estatística do teste assuma um valor extremo em relação 
+# ao valor observado quando H0 é verdadeira.
+
+# Estamos trabalhando com alfa igual a 0.05 (95% de confiança)
+
+t.test(sample_hip_DL$arr_delay, sample_hip_UA$arr_delay, alternative = 'greater')
+# p-valor de 0.9709, logo HA Rejeitada e H0 Não Rejeitada.
+
+# Outro Tipo de Teste
 # Quando a análise for pela Região Crítica
 # 1. Se o valor observado pertencer à Região Crítica, então Rejeitar H0 (Aceitar HA)
 # 2. Se o valor observado não pertencer à Região Crítica, então Aceitar H0 (Rejeitar HA)
 
-# Zobs
+# Z Observado
 sd_hip <- sd(pop_data$arr_delay) / sqrt(nrow(sample_hip_UA))
 z_obs <- (mean(sample_hip_DL$arr_delay) - mean(sample_hip_UA$arr_delay)) / sd_hip
+# -2.751991
 
+# Explicação em https://www.youtube.com/watch?v=dIuicq-hlm4
+# Valor Crítico
+zc <- (1.64+1.65)/2
 
+# Como o valor do Z Observado está fora da Região Crítica, HA Rejeitada e H0 Não Rejeitada.
 
+##### 3 - Conclusão do Teste de Hipótese ####
 
-
-
-
-
-# Conclusão do Teste de Hipótese
-# p-value = 0.9709, logo > que a=0.05
+# p-value = 0.9709, logo > que a = 0.05
 # Não temos evidências suficientes para rejeitar a hipósete nula, ou seja, nos dados analisados não há
 # evidências suficientes que indiquem que DL atrase mais que UA.
+
+# Ou
+
+# Ao nível de 5%, não há evidências de que o tempo médio de atraso da DL seja superior ao da UA.
+
+# Ou ainda
+
+# Falhamos em rejeitar a hipótese nula, pois p-valor é maior que o nível de significância
+# Isso que dizer que há uma probabilidade alta de não haver diferença significativa entre os atrasos.
+# Para os nossos dados, não há evidência estatística de que a DL atrase mais que a UA.
 
