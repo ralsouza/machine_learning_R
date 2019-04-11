@@ -39,9 +39,11 @@ dim(flights) # 3367.776 x 19
 flights[1:3,15:19]
 
 ##### 2 - CARREGANDO OS DADOS ####
+# Como a questão é saber qual empresa atrasa mais do que a outra, é necessário selecionar 
+# apenas os dados onde o tempo de chegada for maior ou igual a zero
 pop_data <- flights %>% 
                 select(carrier, arr_delay) %>% 
-                filter(carrier == 'UA' | carrier == 'DL') %>% 
+                filter(carrier == 'UA' | carrier == 'DL', arr_delay >= 0) %>% 
                 drop_na()
 
 dim(pop_data) # 106.775 x 2
@@ -102,7 +104,7 @@ View(sample_pop_data)
 # e atende a condição de independência n <= 10% do tamanho da população.
 
 # Erro padrão
-erro_padrao_sample_DL = sd(sample_DL$arr_delay) / sqrt(nrow(sample_DL)) # 1.215718
+erro_padrao_sample_DL = sd(sample_DL$arr_delay) / sqrt(nrow(sample_DL)) 
 
 # Limites inferior e superior
 # 1.96 é o valor de z score para 95% de confiança
@@ -118,22 +120,25 @@ erro_padrao_sample_DL = sd(sample_DL$arr_delay) / sqrt(nrow(sample_DL)) # 1.2157
 (-2.575 * 1.5) + 25 # = 21.14 
 
 upper_tail_DL <- ( 1.96 * erro_padrao_sample_DL) + mean(sample_DL$arr_delay) 
-lower_tail_DL <- (-1.96 * erro_padrao_sample_DL) + mean(sample_DL$arr_delay)
+lower_tail_DL <- (-1.96 * erro_padrao_sample_DL) + mean(sample_DL$arr_delay) 
+
 
 # Intervalo de confiança
 ic_DL <- data.frame(ic_dl = c(lower_tail_DL, upper_tail_DL))
-ic_DL 
+mean(sample_DL$arr_delay) # Temos a média de 39 minutos de atraso na empresa DL
+ic_DL # Verificamos que o IC é 33.20088 à 40.52112, ou seja, a média de 39 está dentro deste intervalo
 
 # Exercício 5 - Calcule o intervalo de confiança (95%) da amostra sample_UA
 # Erro padrão
-erro_padrao_sample_UA = sd(sample_UA$arr_delay) / sqrt(nrow(sample_UA)) 
+erro_padrao_sample_UA = sd(sample_UA$arr_delay) / sqrt(nrow(sample_UA))
 
 upper_tail_UA <- ( 1.96 * erro_padrao_sample_UA) + mean(sample_UA$arr_delay) 
 lower_tail_UA <- (-1.96 * erro_padrao_sample_UA) + mean(sample_UA$arr_delay) 
 
 # Intervalo de confiança
 ic_UA <- data.frame(ic_ua = c(lower_tail_UA, upper_tail_UA))
-ic_UA 
+mean(sample_UA$arr_delay) # Temos a média de 34 minutos de atraso na empresa DL
+ic_UA # Verificamos que o IC é 31.38087 à 37.14913, ou seja, a média de 34 está dentro deste intervalo
 
 # Exercício 6 - Crie um plot Visualizando os intervalos de confiança criados nos itens anteriores
 # Dica: Use o geom_point() e geom_errorbar() do pacote ggplot2
@@ -170,7 +175,8 @@ ggplot(df.carriers) +
   geom_errorbar(aes(x = carrier, ymin = lower_tail, ymax = upper_tail), width = .1)
 
 # Exercício 7 - Podemos dizer que muito provavelmente, as amostras vieram da mesma população? 
-# Por que? Sim. Pois parte dos dados de ambas amostras estão no mesmo intervalo de confiança.
+# Por que? Sim. Pois parte dos dados de ambas amostras estão no mesmo intervalo de confiança. Podemos 
+#          notar isso traçando uma linha horizontal imaginária entre os erros para e visualizar onde os dados se encontram
  
 # Exercício 8 - Crie um teste de hipótese para verificar se os voos da Delta Airlines (DL)
 # atrasam mais do que os voos da UA (United Airlines)
@@ -196,7 +202,7 @@ View(sample_UA)
 hist(rnorm(sample_hip_DL$arr_delay))
 
 # Erro padrão
-ep_amostra_DL_hip = sd(sample_hip_DL$arr_delay) / sqrt(nrow(sample_hip_DL))
+ep_amostra_DL_hip = sd(sample_hip_DL$arr_delay) / sqrt(nrow(sample_hip_DL)) 
 mean(sample_hip_DL$arr_delay)
 # 0.661
 
@@ -220,6 +226,7 @@ sd(pop_data$arr_delay)
 # Como o sinal de condição do H1 é >, a Região Crítica é unicaldal à direita
 # Ver vídeo de do passo a passo nas anotações o iCloud
 # Quando a análise for pelo P-Valor
+
 # Para usar o P-Valor na decisão de um teste de hipótese, basta compararmos o P-Valor com:
 #  1. Se P-Valor <= a, então rejeitamos H0 - Baixo valor p: forte evidência empírica contra h0
 #  2. Se P-Valor > a, então aceitamos H0 - Alto valor p: pouca ou nenhuma evidência empírica contra h0
@@ -236,7 +243,7 @@ sd(pop_data$arr_delay)
 # Estamos trabalhando com alfa igual a 0.05 (95% de confiança)
 
 t.test(sample_hip_DL$arr_delay, sample_hip_UA$arr_delay, alternative = 'greater')
-# p-valor de 0.9709, logo HA Rejeitada e H0 Não Rejeitada.
+# p-valor de 0.1496, logo HA Rejeitada e H0 Não Rejeitada.
 
 # Outro Tipo de Teste
 # Quando a análise for pela Região Crítica
@@ -244,19 +251,19 @@ t.test(sample_hip_DL$arr_delay, sample_hip_UA$arr_delay, alternative = 'greater'
 # 2. Se o valor observado não pertencer à Região Crítica, então Aceitar H0 (Rejeitar HA)
 
 # Z Observado
-sd_hip <- sd(pop_data$arr_delay) / sqrt(nrow(sample_hip_UA))
-z_obs <- (mean(sample_hip_DL$arr_delay) - mean(sample_hip_UA$arr_delay)) / sd_hip
-# -2.751991
+sd_hip <- sd(pop_data$arr_delay) / sqrt(nrow(sample_hip_UA)) 
+z_obs <- (mean(sample_hip_DL$arr_delay) - mean(sample_hip_UA$arr_delay)) / sd_hip 
+# 1.576783
 
 # Explicação em https://www.youtube.com/watch?v=dIuicq-hlm4
-# Valor Crítico
-zc <- (1.64+1.65)/2
+# Valor Crítico ou Região Crítica
+zc <- (1.64+1.65)/2 # 1.645
 
 # Como o valor do Z Observado está fora da Região Crítica, HA Rejeitada e H0 Não Rejeitada.
 
 ##### 3 - Conclusão do Teste de Hipótese ####
 
-# p-value = 0.9709, logo > que a = 0.05
+# p-value = 0.1496, logo > que a = 0.05
 # Não temos evidências suficientes para rejeitar a hipósete nula, ou seja, nos dados analisados não há
 # evidências suficientes que indiquem que DL atrase mais que UA.
 
