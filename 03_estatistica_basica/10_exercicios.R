@@ -188,15 +188,11 @@ ggplot(df.carriers) +
 #     arr_delay: DL > UA
 
 # Coletar 1000 amostras aleatórias
-sample_hip_DL <- pop_data_DL[sample(nrow(pop_data_DL), 1000), ] %>% 
-  mutate(sample_id = 1) 
 
-View(sample_DL)
+# Coletar amostras apenas com atrasos maiores que zero, pois queremos saber quem atrasa mais
+sample_hip_DL <- sample_n(filter(pop_data, carrier == "DL", arr_delay > 0), 1000)
+sample_hip_UA <- sample_n(filter(pop_data, carrier == "UA", arr_delay > 0), 1000)
 
-sample_hip_UA <- pop_data_UA[sample(nrow(pop_data_UA), 1000), ] %>% 
-  mutate(sample_id = 2)
-
-View(sample_UA)
 
 ?rnorm
 hist(rnorm(sample_hip_DL$arr_delay))
@@ -204,11 +200,10 @@ hist(rnorm(sample_hip_DL$arr_delay))
 # Erro padrão
 ep_amostra_DL_hip = sd(sample_hip_DL$arr_delay) / sqrt(nrow(sample_hip_DL)) 
 mean(sample_hip_DL$arr_delay)
-# 0.661
 
 ep_amostra_UA_hip = sd(sample_hip_UA$arr_delay) / sqrt(nrow(sample_hip_UA))
 mean(sample_hip_UA$arr_delay)
-# 4.661
+
 
 # Desvio padrão da população
 sd(pop_data$arr_delay)
@@ -243,7 +238,7 @@ sd(pop_data$arr_delay)
 # Estamos trabalhando com alfa igual a 0.05 (95% de confiança)
 
 t.test(sample_hip_DL$arr_delay, sample_hip_UA$arr_delay, alternative = 'greater')
-# p-valor de 0.1496, logo HA Rejeitada e H0 Não Rejeitada.
+# O valor-p de 0.9626, logo HA Rejeitada e H0 Não Rejeitada.
 
 # Outro Tipo de Teste
 # Quando a análise for pela Região Crítica
@@ -253,7 +248,7 @@ t.test(sample_hip_DL$arr_delay, sample_hip_UA$arr_delay, alternative = 'greater'
 # Z Observado
 sd_hip <- sd(pop_data$arr_delay) / sqrt(nrow(sample_hip_UA)) 
 z_obs <- (mean(sample_hip_DL$arr_delay) - mean(sample_hip_UA$arr_delay)) / sd_hip 
-# 1.576783
+# -2.586619
 
 # Explicação em https://www.youtube.com/watch?v=dIuicq-hlm4
 # Valor Crítico ou Região Crítica
@@ -263,7 +258,7 @@ zc <- (1.64+1.65)/2 # 1.645
 
 ##### 3 - Conclusão do Teste de Hipótese ####
 
-# p-value = 0.1496, logo > que a = 0.05
+# p-value = 0.9626, logo > que a = 0.05
 # Não temos evidências suficientes para rejeitar a hipósete nula, ou seja, nos dados analisados não há
 # evidências suficientes que indiquem que DL atrase mais que UA.
 
