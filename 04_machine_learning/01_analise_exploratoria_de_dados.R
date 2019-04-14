@@ -62,14 +62,22 @@ range(carros$preco)
 diff(range(carros$preco))
 
 # Plot dos dados
-
+# Usamos boxplot e histogramas para análise de dados univariada
 # Boxplot - Leitura de baixo para cima  - Q1, Q2, Mediana e Q3
 boxplot(carros$preco, main = 'Boxplot para Preços de Carros Usados', ylab = 'Preço (R$)')
-boxplot(carros$quilometragem, main = 'Boxplot para Km de Carros Usados,', ylab = 'Quilometragem (Km)')
+boxplot(carros$quilometragem, main = 'Boxplot para Quilometragem de Carros Usados,', ylab = 'Quilometragem (Km)')
 # Obs.: Podemos verificar nas "bolinhas", os outliers máximos e mínimos
 
+# Histograma - Indicam a frequência de valores dentro de cada bin (classe de valores)
+hist(carros$preco, main = 'Histograma para Valores de Carros Usados', ylab = 'Preço (R$)')
+hist(carros$quilometragem, main = 'Histograma para Quilometragem de carros Usados', ylab = 'Quilometragem (Km)')
+# Reduzindo os bins para visualizar um pouco melhor os dados
+hist(carros$quilometragem, main = 'Histograma para Quilometragem de Carros Usados', ylab = 'Quilometragem (Km)', breaks = 5)
 
+# Usa-se o scatterplot para analisar mais de uma variáveis, ou seja, multivariada
 
+# Analisar a relação entre a variável preço e quilometragem
+# Usando a variável preço como variável dependente (y)
 
 
 
