@@ -125,6 +125,7 @@ carros$conserv <- carros$cor %in% c('Preto','Cinza','Prata','Branco')
 # Checando a variável - Quantos automóveis tem cores conservadoras e quantos não tem
 table(carros$conserv)
 
+#### ANÁLISE DOS DADOS VIA CROSS-TABLE ####
 # Checando o relacionamento entre duas variáveis categóricas criando uma Cross-Table
 # Tabelas de Contingência fornecem uma maneira de exibir as frequências e frequências relativas
 # de observações, que são classificadas de acordo com duas variáveis categóricas. Os elementos
@@ -138,9 +139,50 @@ library(gmodels)
 gmodels::CrossTable(x = carros$modelo, y = carros$conserv)
 
 
+#### TESTE QUI QUADRADO ####
+
+# Qui Quadrado, simbolizado por χ2 é um teste de 
+# hipóteses que se destina a encontrar um valor da 
+# dispersão para duas variáveis nominais, avaliando a 
+# associação existente entre variáveis qualitativas.
+
+# É um teste não paramétrico, ou seja, não depende dos 
+# parâmetros populacionais, como média e variância.
+
+# O princípio básico deste método é comparar proporções, 
+# isto é, as possíveis divergências entre as frequências 
+# observadas e esperadas para um certo evento.
+# Evidentemente, pode-se dizer que dois grupos se 
+# comportam de forma semelhante se as diferenças entre 
+# as frequências observadas e as esperadas em cada 
+# categoria forem muito pequenas, próximas a zero.
+
+# Ou seja, Se a probabilidade é muito baixa, ele fornece 
+# fortes evidências de que as duas variáveis estão 
+# associadas.
+
+gmodels::CrossTable(x = carros$modelo, y = carros$conserv, chisq = TRUE)
+stats::chisq.test(x = carros$modelo, y = carros$conserv)
+
+#### TESTANDO AS HIPÓTESES ####
+# Podemos aplicar um teste de hipótese para testar as variáveis durante a análise exploratória também,
+# ao invés de apenas problemas aos negócio
+
+# Trabalhamos com 2 hipóteses:
+
+# Hipótese nula: As frequências observadas não são diferentes das frequências esperadas.
+# Não existe diferença entre as frequências (contagens) dos grupos.
+# Portanto, não há associação entre os grupos
+
+# Hipótese alternativa: As frequências observadas são diferentes das frequências esperadas, 
+# portanto existe diferença entre as frequências.
+# Portanto, há associação entre os grupos.
 
 
-
+# Neste caso, o valor do Chi = 0.15  
+# E graus de liberdade (df) = 2
+# Portanto, não há associação entre os grupos
+# O valor alto do p-value confirma esta conclusão.
 
 
 
