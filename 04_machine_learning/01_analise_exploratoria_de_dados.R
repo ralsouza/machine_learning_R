@@ -28,6 +28,9 @@ carros <- readr::read_csv('carros-usados.csv'
                           )
                  )
 
+# Renomear a coluna kilometragem para quilometragem
+carros <- plyr::rename(carros, c('kilometragem' = 'quilometragem'))
+
 # Exibir a especificação do data frame conforme nova especificação
 readr::spec(carros)
 
@@ -38,6 +41,49 @@ str(carros)
 #### MEDIDAS DE TENDÊNCIA CENTRAL ####
 summary(carros$ano)
 summary(carros[c('preco', 'kilometragem')])
+
+#### ANÁLISE EXPLORATÓRIA PARA VARIÁVEIS NUMÉRICAS ####
+mean(carros$preco)
+median(carros$preco)
+# Obs.: Os dados não estão em uma distribuição normal, pois a média e mediana tem valores diferentes
+
+# Quartis
+quantile(carros$preco)
+
+# Percentis
+quantile(carros$preco, probs = c(0.01, 0.50, 0.99))
+quantile(carros$preco, seq(from = 0, to = 1, by = 0.20))
+
+# Intervalo interquartil, diferença entre Q3 e Q1
+IQR(carros$preco)
+
+# Alcance dos dados
+range(carros$preco)
+diff(range(carros$preco))
+
+# Plot dos dados
+
+# Boxplot - Leitura de baixo para cima  - Q1, Q2, Mediana e Q3
+boxplot(carros$preco, main = 'Boxplot para Preços de Carros Usados', ylab = 'Preço (R$)')
+boxplot(carros$quilometragem, main = 'Boxplot para Km de Carros Usados,', ylab = 'Quilometragem (Km)')
+# Obs.: Podemos verificar nas "bolinhas", os outliers máximos e mínimos
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
