@@ -80,22 +80,62 @@ hist(carros$quilometragem, main = 'Histograma para Quilometragem de Carros Usado
 
 # Analisar a relação entre a variável preço e quilometragem
 # Usando a variável preço como variável dependente (y)
+plot(x = carros$quilometragem, y = carros$preco,
+     main = 'Scatterplot - Preço vs Km',
+     xlab = 'Quilometragem (Km)',
+     ylab = 'Preço (R$)')
 
+#### MEDIDAS DE DISPERSÃO ####
+# Ao interpretar a variância, números muito altos indicam que os dados estão mais espalhados
+# amplamente em torno da média. O desvio padrão indica, em média, a quantidade de cada valor
+# diferente da média. Se a variância e o desvio padrão estiverem muito altos, é necessário 
+# usar algumas técnicas para tratar estes valores
+var(carros$preco)
+sd(carros$preco)
+var(carros$quilometragem)
+sd(carros$quilometragem)
 
+#### ANÁLISE EXPLORATÓRIA DE DADOS PARA VARIÁVEIS CATEGÓRICAS ####
 
+# Criando tabelas de contingência - são usadas para registrar observações independentes 
+# de duas ou mais variáveis aleatórias, normalmente qualitativas. 
+# fonte: https://pt.wikipedia.org/wiki/Tabela_de_contingência
 
+# Lista as categorias das variáveis nominais
+?table
+str(carros)
 
+# Como exemplo, a variável cor e modelo são categóricas, podemos calcular as ocorrências de cada categoria
+table(carros$cor)
+table(carros$modelo)
 
+# Calculando a proporção de cada categoria
+model_table <- table(carros$modelo)
+prop.table(model_table)
 
+# Resolvendo o arredondamento e convertendo para formato percentual
+model_table <- prop.table(model_table) * 100
+model_table <- round(model_table, digits = 1)
 
+# Criando uma nova variável indicando cores conservadoras
+# (que as pessoas compram com mais frequência)
+head(carros)
+carros$conserv <- carros$cor %in% c('Preto','Cinza','Prata','Branco')
 
+# Checando a variável - Quantos automóveis tem cores conservadoras e quantos não tem
+table(carros$conserv)
 
+# Checando o relacionamento entre duas variáveis categóricas criando uma Cross-Table
+# Tabelas de Contingência fornecem uma maneira de exibir as frequências e frequências relativas
+# de observações, que são classificadas de acordo com duas variáveis categóricas. Os elementos
+# de uma categoria são exibidas através das colunas e os elementos de outra categoria são 
+# são exibidas sobre as linhas
+install.packages('gmodels')
+library(gmodels)
+?CrossTable
 
-
-
-
-
-
+# Gerando a tabela cruzada entre modelo e cores conservadoras
+gmodels::CrossTable(x = carros$modelo, y = carros$conserv)
 
 
 
