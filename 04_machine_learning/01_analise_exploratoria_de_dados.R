@@ -1,4 +1,5 @@
-# ANÁLISE EXPLORATÓRIA DE DADOS
+#### ANÁLISE EXPLORATÓRIA DE DADOS ####
+# Usar este script como um modelo de ponto de partida para análises exploratórias no futuro
 
 setwd('/Users/ls_rafael/Documents/GitHub/machine_learning_R/04_machine_learning')
 
@@ -35,6 +36,7 @@ carros <- plyr::rename(carros, c('kilometragem' = 'quilometragem'))
 readr::spec(carros)
 
 #### RESUMO DOS DADOS  ####
+attributes(carros)
 View(carros)
 str(carros)
 
@@ -78,6 +80,7 @@ hist(carros$quilometragem, main = 'Histograma para Quilometragem de Carros Usado
 
 # Analisar a relação entre a variável preço e quilometragem
 # Usando a variável preço como variável dependente (y)
+
 
 
 
