@@ -35,3 +35,30 @@ readr::spec(carros)
 View(carros)
 str(carros)
 
+#### MEDIDAS DE TENDÊNCIA CENTRAL ####
+summary(carros$ano)
+summary(carros[c('preco', 'kilometragem')])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
