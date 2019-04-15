@@ -117,13 +117,13 @@ prop.table(model_table)
 model_table <- prop.table(model_table) * 100
 model_table <- round(model_table, digits = 1)
 
-# Criando uma nova variável indicando cores conservadoras
+# Criando uma nova variável indicando cores conservadoras de automóveis
 # (que as pessoas compram com mais frequência)
 head(carros)
-carros$conserv <- carros$cor %in% c('Preto','Cinza','Prata','Branco')
+carros$cores_conservadoras <- carros$cor %in% c('Preto','Cinza','Prata','Branco')
 
 # Checando a variável - Quantos automóveis tem cores conservadoras e quantos não tem
-table(carros$conserv)
+table(carros$cores_conservadoras)
 
 #### ANÁLISE DOS DADOS VIA CROSS-TABLE ####
 # Checando o relacionamento entre duas variáveis categóricas criando uma Cross-Table
@@ -136,7 +136,7 @@ library(gmodels)
 ?CrossTable
 
 # Gerando a tabela cruzada entre modelo e cores conservadoras
-gmodels::CrossTable(x = carros$modelo, y = carros$conserv)
+gmodels::CrossTable(x = carros$modelo, y = carros$cores_conservadoras)
 
 
 #### TESTE QUI QUADRADO ####
@@ -161,8 +161,8 @@ gmodels::CrossTable(x = carros$modelo, y = carros$conserv)
 # fortes evidências de que as duas variáveis estão 
 # associadas.
 
-gmodels::CrossTable(x = carros$modelo, y = carros$conserv, chisq = TRUE)
-stats::chisq.test(x = carros$modelo, y = carros$conserv)
+gmodels::CrossTable(x = carros$modelo, y = carros$cores_conservadoras, chisq = TRUE)
+stats::chisq.test(x = carros$modelo, y = carros$cores_conservadoras)
 
 #### TESTANDO AS HIPÓTESES ####
 # Podemos aplicar um teste de hipótese para testar as variáveis durante a análise exploratória também,
