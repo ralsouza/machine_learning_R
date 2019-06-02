@@ -29,8 +29,11 @@ summary(kyphosis)
 ##### Exercício - Depois de explorar o dataset, crie um modelo de árvore de decisão ####
 # Método class para problemas de classificação
 # Método anova para problemas de regressão
-modelo_v1 <- rpart(Kyphosis ~., data = kyphosis)
+modelo_v1 <- rpart(Kyphosis ~., data = kyphosis, method = 'class')
 summary(modelo_v1)
+
+modelo_v2 <- rpart(Kyphosis ~ Age + Number, data = kyphosis, method = 'class')
+summary(modelo_v2)
 
 # Para examinar o resultado de uma árvore de decisão, existem diversas funções, 
 # mas você pode usar printcp()
@@ -41,7 +44,7 @@ printcp(modelo_v1)
 plot(modelo_v1)
 text(modelo_v1, use.n = TRUE)
 
-
-fancyRpartPlot(modelo_v1)
-
-
+# Usando a biblioteca Rattle
+?fancyRpartPlot
+fancyRpartPlot(modelo_v1, main = 'Kyphosis Analysis (modelo_v1)')
+fancyRpartPlot(modelo_v2, main = 'Kyphosis Analysis (modelo_v2)')
