@@ -9,22 +9,27 @@ getwd()
 # Árvore de Decisão: Existem diversos pacotes, usaremos aqui o rpart
 install.packages('rpart')
 library(rpart)
+?rpart
 
 # Visualização: Este pacote faz a visualização dos dados ficar mais legível
 install.packages('rpart.plot')
 library(rpart.plot)
+?rpart.plot
 
 # Dataset: Vamos utilizar um dataset que é disponibilizado junto com o pacote rpart
 ?kyphosis
 str(kyphosis)
 head(kyphosis)
+summary(kyphosis)
 
-# Exercício 1 - Depois de explorar o dataset, crie um modelo de árvore de decisão
+##### Exercício - Depois de explorar o dataset, crie um modelo de árvore de decisão ####
+modelo_v1 <- rpart(Kyphosis ~., data = kyphosis)
+summary(modelo_v1)
 
-
-# Para examinar o resultado de uma árvore de decisao, existem diversas funcões, mas você pode usar printcp()
-
+# Para examinar o resultado de uma árvore de decisão, existem diversas funções, 
+# mas você pode usar printcp()
+printcp(modelo_v1)
 
 # Visualizando a ávore (execute uma função para o plot e outra para o texto no plot)
 # Utilize o zoom para visualizar melhor o gráfico
-prp(arvore)
+prp(modelo_v1)
