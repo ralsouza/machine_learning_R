@@ -32,7 +32,7 @@ summary(kyphosis)
 modelo_v1 <- rpart(Kyphosis ~., data = kyphosis, method = 'class')
 summary(modelo_v1)
 
-modelo_v2 <- rpart(Kyphosis ~ Age + Number, data = kyphosis, method = 'class')
+modelo_v2 <- rpart(Kyphosis ~ Age + Start, data = kyphosis, method = 'class')
 summary(modelo_v2)
 
 # Para examinar o resultado de uma árvore de decisão, existem diversas funções, 
