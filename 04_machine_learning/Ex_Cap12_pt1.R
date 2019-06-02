@@ -1,19 +1,21 @@
 # Solução Lista de Exercícios - Capítulo 12
 
-# Obs: Caso tenha problemas com a acentuação, consulte este link:
-# https://support.rstudio.com/hc/en-us/articles/200532197-Character-Encoding
-
-# Configurando o diretório de trabalho
-# Coloque entre aspas o diretório de trabalho que você está usando no seu computador
-# Não use diretórios com espaço no nome
-setwd("C:/FCD/BigDataRAzure/Cap12")
+#### 1. Setup Ambiente ####
+# Diretório de Trabalho
+setwd('/Users/ls_rafael/Documents/GitHub/machine_learning_R/04_machine_learning')
 getwd()
 
-# Existem diversos pacotes para arvores de recisao em R. Usaremos aqui o rpart.
+# Pacotes
+# Árvore de Decisão: Existem diversos pacotes, usaremos aqui o rpart
 install.packages('rpart')
 library(rpart)
 
-# Vamos utilizar um dataset que é disponibilizado junto com o pacote rpart
+# Visualização: Este pacote faz a visualização dos dados ficar mais legível
+install.packages('rpart.plot')
+library(rpart.plot)
+
+# Dataset: Vamos utilizar um dataset que é disponibilizado junto com o pacote rpart
+?kyphosis
 str(kyphosis)
 head(kyphosis)
 
@@ -25,9 +27,4 @@ head(kyphosis)
 
 # Visualizando a ávore (execute uma função para o plot e outra para o texto no plot)
 # Utilize o zoom para visualizar melhor o gráfico
-
-
-# Este outro pacote faz a visualizaco ficar mais legivel
-install.packages('rpart.plot')
-library(rpart.plot)
 prp(arvore)
