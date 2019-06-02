@@ -11,10 +11,14 @@ install.packages('rpart')
 library(rpart)
 ?rpart
 
-# Visualização: Este pacote faz a visualização dos dados ficar mais legível
+# Visualização: Estes pacotes fazem a visualização dos dados ficar mais legível
 install.packages('rpart.plot')
 library(rpart.plot)
 ?rpart.plot
+
+install.packages('rattle')
+library(rattle)
+?fancyRpartPlot
 
 # Dataset: Vamos utilizar um dataset que é disponibilizado junto com o pacote rpart
 ?kyphosis
@@ -23,6 +27,8 @@ head(kyphosis)
 summary(kyphosis)
 
 ##### Exercício - Depois de explorar o dataset, crie um modelo de árvore de decisão ####
+# Método class para problemas de classificação
+# Método anova para problemas de regressão
 modelo_v1 <- rpart(Kyphosis ~., data = kyphosis)
 summary(modelo_v1)
 
@@ -32,4 +38,10 @@ printcp(modelo_v1)
 
 # Visualizando a ávore (execute uma função para o plot e outra para o texto no plot)
 # Utilize o zoom para visualizar melhor o gráfico
-prp(modelo_v1)
+plot(modelo_v1)
+text(modelo_v1, use.n = TRUE)
+
+
+fancyRpartPlot(modelo_v1)
+
+
