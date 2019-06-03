@@ -48,3 +48,7 @@ text(modelo_v1, use.n = TRUE)
 ?fancyRpartPlot
 fancyRpartPlot(modelo_v1, main = 'Kyphosis Analysis (modelo_v1)')
 fancyRpartPlot(modelo_v2, main = 'Kyphosis Analysis (modelo_v2)')
+
+# Usando o pacote rpart.plot
+?rpart.plot
+rpart.plot(modelo_v2)
