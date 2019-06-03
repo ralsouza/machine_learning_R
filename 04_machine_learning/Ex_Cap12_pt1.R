@@ -1,4 +1,4 @@
-# Solução Lista de Exercícios - Capítulo 12
+# Lista I de Exercícios - Capítulo 12
 
 #### 1. Setup Ambiente ####
 # Diretório de Trabalho
