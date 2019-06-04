@@ -26,7 +26,7 @@ str(kyphosis)
 head(kyphosis)
 summary(kyphosis)
 
-##### Exercício - Depois de explorar o dataset, crie um modelo de árvore de decisão ####
+##### 2. Exercício - Depois de explorar o dataset, crie um modelo de árvore de decisão ####
 # Método class para problemas de classificação
 # Método anova para problemas de regressão
 modelo_v1 <- rpart(Kyphosis ~., data = kyphosis, method = 'class')
