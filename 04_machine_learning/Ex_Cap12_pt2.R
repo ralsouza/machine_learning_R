@@ -30,25 +30,27 @@ help(kmeans)
 # (aprendizagem não supervisionada), use a documentação para fazer sua pesquisa
 # Neste caso, ja sabemos quantos grupos (clusters) existem em nossos dados (3)
 # Perceba que o dataset iris possui 5 colunas, mas estamos usando as 4 primeiras
-cluster_iris <- kmeans(iris[1:4] , 3)
+iris_cl <- iris[ ,1:4]
+
+# Opção com o algoritimo K-means
+cluster_iris_km <- kmeans(iris_cl , 3)
+
+# Algoritimo pam - Uma versão mais robusta do K-means, ver help para detalhes
+cluster_iris_pm <- pam(iris_cl, 3)$clustering
 
 # Obtendo informação sobre os clusters
 # Foram criados 3 clusters: cluster 1, 2 e 3
 # Perceba que apesar o algoritmo ter feito a divisão dos dados em clusters, 
 # houve problema em dividir alguns dos dados, que apesar de terem caracteristicas 
 # diferentes, ficaram no mesmo cluster
-summary(cluster_iris)
 
 # Visualizando os clusters
 install.packages("cluster")
 library(cluster)
 help(clusplot)
 
-clusplot(cluster_iris, cluster_iris$cluster, color = TRUE, shade = TRUE, labels = 0, lines = 0, )
+# K-means
+clusplot(iris_cl, cluster_iris_km$cluster, color = TRUE, shade = TRUE, labels = 0, lines = 0, main = 'Cluster Iris (Algoritimo K-means)')
 
-
-clusplot(iris[ ,1:4], cluster_iris, color = TRUE)
-
-
-
-
+# pam
+clusplot(iris_cl, cluster_iris_pm, color = TRUE, shade = TRUE, labels = 0, lines = 0, main = 'Cluster Iris (Algoritimo pam)')
