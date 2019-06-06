@@ -23,7 +23,7 @@ ds_SKD <- read_csv( 'StudentKnowledgeData.csv'
                       ,PEG = col_double()
                       ,UNS = col_character()
                     )
-                   )
+                   )   
 head(ds_SKD)
 summary(ds_SKD)
 str(ds_SKD)

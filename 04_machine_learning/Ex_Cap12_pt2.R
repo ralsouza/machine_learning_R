@@ -33,9 +33,12 @@ help(kmeans)
 iris_cl <- iris[ ,1:4]
 
 # Opção com o algoritimo K-means
-cluster_iris_km <- kmeans(iris_cl , 3)
+?kmeans
+cluster_iris_km_v1 <- kmeans(iris_cl , 3)
+cluster_iris_km_v2 <- kmeans(iris_cl , 3, nstart = 20)
 
 # Algoritimo pam - Uma versão mais robusta do K-means, ver help para detalhes
+?pam
 cluster_iris_pm <- pam(iris_cl, 3)$clustering
 
 # Obtendo informação sobre os clusters
@@ -43,6 +46,9 @@ cluster_iris_pm <- pam(iris_cl, 3)$clustering
 # Perceba que apesar o algoritmo ter feito a divisão dos dados em clusters, 
 # houve problema em dividir alguns dos dados, que apesar de terem caracteristicas 
 # diferentes, ficaram no mesmo cluster
+table(cluster_iris_km_v1$cluster, iris$Species)
+table(cluster_iris_km_v2$cluster, iris$Species)
+table(cluster_iris_pm   , iris$Species)
 
 # Visualizando os clusters
 install.packages("cluster")
@@ -50,7 +56,8 @@ library(cluster)
 help(clusplot)
 
 # K-means
-clusplot(iris_cl, cluster_iris_km$cluster, color = TRUE, shade = TRUE, labels = 0, lines = 0, main = 'Cluster Iris (Algoritimo K-means)')
+clusplot(iris_cl, cluster_iris_km_v1$cluster, color = TRUE, shade = TRUE, labels = 0, lines = 0, main = 'Cluster Iris v1 (Algoritimo K-means)')
+clusplot(iris_cl, cluster_iris_km_v2$cluster, color = TRUE, shade = TRUE, labels = 0, lines = 0, main = 'Cluster Iris v2 (Algoritimo K-means)')
 
 # pam
 clusplot(iris_cl, cluster_iris_pm, color = TRUE, shade = TRUE, labels = 0, lines = 0, main = 'Cluster Iris (Algoritimo pam)')
